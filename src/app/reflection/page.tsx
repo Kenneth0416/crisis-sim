@@ -24,6 +24,7 @@ export default function ReflectionPage() {
     for (const q of REFLECTION_QUESTIONS) {
       if (!ratings[q.id]) { setError('Please rate all questions before submitting.'); return; }
     }
+    if (!openText.trim()) { setError('Please answer the open-ended question before submitting.'); return; }
 
     addEvent('reflection_submit', 'reflection', {
       ratings,
@@ -135,7 +136,7 @@ export default function ReflectionPage() {
                   </div>
                   <textarea
                     className="w-full rounded-lg border border-slate-200 bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:border-[#137fec] focus:ring-[#137fec] sm:text-sm p-3"
-                    placeholder="Optional: explain your rating..."
+                    placeholder="Explain your rating..."
                     rows={2}
                     value={texts[q.id] || ''}
                     onChange={(e) => setTexts((p) => ({ ...p, [q.id]: e.target.value }))}

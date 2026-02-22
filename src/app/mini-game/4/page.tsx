@@ -40,7 +40,7 @@ export default function MiniGame4Page() {
     const duration = Date.now() - enterTime.current;
     setMg4Result({ ranking });
     addEvent('mg_submit', 'mg4', { ranking, duration_ms: duration });
-    router.push('/scenario/1');
+    router.push('/briefing');
   };
 
   const usedRanks = new Set(Object.values(ranking));

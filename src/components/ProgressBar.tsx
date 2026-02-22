@@ -7,6 +7,7 @@ const STEPS = [
   { id: 'mg2', label: 'Game 2' },
   { id: 'mg3', label: 'Game 3' },
   { id: 'mg4', label: 'Game 4' },
+  { id: 'briefing', label: 'Briefing' },
   { id: 's1', label: 'Scenario 1' },
   { id: 's2', label: 'Scenario 2' },
   { id: 's3', label: 'Scenario 3' },
