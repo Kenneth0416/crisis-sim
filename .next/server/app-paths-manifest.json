@@ -1,0 +1,22 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/api/admin/route": "app/api/admin/route.js",
+  "/api/comparison/route": "app/api/comparison/route.js",
+  "/api/event/route": "app/api/event/route.js",
+  "/api/export/route": "app/api/export/route.js",
+  "/api/init-db/route": "app/api/init-db/route.js",
+  "/api/session/route": "app/api/session/route.js",
+  "/comparison/page": "app/comparison/page.js",
+  "/consent/page": "app/consent/page.js",
+  "/finish/page": "app/finish/page.js",
+  "/login/page": "app/login/page.js",
+  "/mini-game/1/page": "app/mini-game/1/page.js",
+  "/mini-game/2/page": "app/mini-game/2/page.js",
+  "/mini-game/3/page": "app/mini-game/3/page.js",
+  "/mini-game/4/page": "app/mini-game/4/page.js",
+  "/page": "app/page.js",
+  "/reflection/page": "app/reflection/page.js",
+  "/scenario/[id]/page": "app/scenario/[id]/page.js"
+}

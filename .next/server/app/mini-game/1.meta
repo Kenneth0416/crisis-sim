@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/mini-game/layout,_N_T_/mini-game/1/layout,_N_T_/mini-game/1/page,_N_T_/mini-game/1"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/mini-game/1/__PAGE__",
+    "/mini-game/1",
+    "/mini-game",
+    "/_index",
+    "/_head"
+  ]
+}
