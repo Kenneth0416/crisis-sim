@@ -1,3 +1,0 @@
-module.exports=[27572,a=>{"use strict";var b=a.i(7997);function c({children:a}){return(0,b.jsxs)("html",{lang:"en",children:[(0,b.jsxs)("head",{children:[(0,b.jsx)("link",{href:"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap",rel:"stylesheet"}),(0,b.jsx)("link",{href:"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",rel:"stylesheet"})]}),(0,b.jsx)("body",{className:"bg-[#f6f7f8] text-slate-900 min-h-screen flex flex-col",style:{fontFamily:"'Inter', sans-serif"},children:a})]})}a.s(["default",()=>c,"metadata",0,{title:"Crisis Sim 2024",description:"Corporate Crisis Management Simulation"}])}];
-
-//# sourceMappingURL=src_app_layout_tsx_cc8184fa._.js.map
