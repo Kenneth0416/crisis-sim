@@ -272,5 +272,11 @@ export async function computeRanks(sessionId: string) {
 
 export async function deleteSession(sessionId: string) {
   await sql`DELETE FROM events WHERE session_id = ${sessionId}`;
+  await sql`DELETE FROM mini_game_entries WHERE run_id = ${sessionId}`;
   await sql`DELETE FROM sessions WHERE session_id = ${sessionId}`;
+}
+
+export async function getMiniGameEntries(): Promise<MiniGameEntry[]> {
+  const rows = await sql`SELECT * FROM mini_game_entries ORDER BY created_at DESC`;
+  return rows as unknown as MiniGameEntry[];
 }

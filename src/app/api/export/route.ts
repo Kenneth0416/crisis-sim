@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import * as XLSX from 'xlsx';
-import { getSessions, getEvents } from '@/lib/db';
+import { getSessions, getEvents, getMiniGameEntries } from '@/lib/db';
 
 const SESSION_COLUMNS = [
   { key: 'name', header: 'Nickname' },
@@ -45,6 +45,7 @@ export async function GET() {
   try {
     const sessions = await getSessions();
     const events = await getEvents();
+    const miniGameEntries = await getMiniGameEntries();
     const wb = XLSX.utils.book_new();
 
     // Sessions sheet with ordered columns
@@ -56,6 +57,10 @@ export async function GET() {
     // Events sheet
     const eventsWs = XLSX.utils.json_to_sheet(events);
     XLSX.utils.book_append_sheet(wb, eventsWs, 'Events');
+
+    // Mini-game entries sheet
+    const miniGameWs = XLSX.utils.json_to_sheet(miniGameEntries);
+    XLSX.utils.book_append_sheet(wb, miniGameWs, 'MiniGameEntries');
 
     const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
     return new NextResponse(buf, {
