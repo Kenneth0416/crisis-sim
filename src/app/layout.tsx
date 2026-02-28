@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Crisis Sim 2024',
+  title: 'Crisis Sim',
   description: 'Corporate Crisis Management Simulation',
 };
 

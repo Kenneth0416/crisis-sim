@@ -77,8 +77,7 @@ export interface ScenarioAction {
   icon: string;
   consequences: string[];
   consequenceColors: string[];
-  reaction: string;
-  reactionIcon: string;
+  reactions: string[];
   scores: { economy: number; environment: number; legitimacy: number; resilience: number };
 }
 
@@ -98,33 +97,58 @@ export const SCENARIOS: Scenario[] = [
     description: 'The bridge collapse has just occurred. Information is incomplete, public attention is intense, and operational uncertainty is high. Any action taken at this stage will shape stakeholder trust and constrain future options.',
     actions: [
       {
-        id: 1, name: 'Suspend All Operations', posture: 'Precaution-First', postureColor: 'blue', icon: 'pause_circle',
-        consequences: ['Operations halted until assessments complete', 'Short-term economic losses increase'], consequenceColors: ['amber', 'red'],
-        reaction: 'Safety-Focused', reactionIcon: 'verified_user',
+        id: 1, name: 'Suspend all operations pending full investigations', posture: 'Precaution-first posture', postureColor: 'blue', icon: 'pause_circle',
+        consequences: ['Operations remain halted until technical and environmental assessments are completed', 'Short-term economic losses increase, but safety risks are minimised'], consequenceColors: ['amber', 'red'],
+        reactions: [
+          'Engineers: Strongly supportive due to safety assurance',
+          'Environmental Agency: Supportive of precautionary approach',
+          'Government: Cautiously supportive, but concerned about economic impact',
+          'Customers: Frustrated by prolonged uncertainty and delays',
+        ],
         scores: { economy: -6, environment: 6, legitimacy: 5, resilience: 7 },
       },
       {
-        id: 2, name: 'Resume Limited Operations', posture: 'Balanced', postureColor: 'green', icon: 'tune',
-        consequences: ['Partial operations under strict monitoring', 'Some risks remain but disruption reduced'], consequenceColors: ['green', 'amber'],
-        reaction: 'Cautiously Optimistic', reactionIcon: 'sentiment_neutral',
+        id: 2, name: 'Resume limited operations with enhanced monitoring', posture: 'Balanced risk-management posture', postureColor: 'green', icon: 'tune',
+        consequences: ['Partial operations resume under strict monitoring and contingency measures', 'Some risks remain, but disruption is reduced'], consequenceColors: ['green', 'amber'],
+        reactions: [
+          'Government: Tentatively supportive due to the balance of safety and continuity',
+          'Engineers: Cautious, highlighting residual uncertainty',
+          'Environmental Agency: Concerned about premature reopening',
+          'Customers: Moderately reassured by partial service restoration',
+        ],
         scores: { economy: 3, environment: -2, legitimacy: 1, resilience: 2 },
       },
       {
-        id: 3, name: 'Prioritise Rapid Recovery', posture: 'Economy-First', postureColor: 'red', icon: 'speed',
-        consequences: ['Operations resume quickly', 'Investigations proceed in parallel'], consequenceColors: ['green', 'amber'],
-        reaction: 'Divided', reactionIcon: 'thumbs_up_down',
+        id: 3, name: 'Prioritise rapid operational recovery', posture: 'Economy-first posture', postureColor: 'red', icon: 'speed',
+        consequences: ['Operations resume quickly to minimise disruption and losses', 'Investigations and assessments proceed in parallel'], consequenceColors: ['green', 'amber'],
+        reactions: [
+          'Customers: Strongly supportive due to service continuity',
+          'Government: Concerned about safety and accountability',
+          'Engineers: Strongly opposed due to unresolved risks',
+          'Environmental Agency: Strongly opposed due to precaution violations',
+        ],
         scores: { economy: 7, environment: -7, legitimacy: -4, resilience: -6 },
       },
       {
-        id: 4, name: 'Public Communication Focus', posture: 'Legitimacy-First', postureColor: 'purple', icon: 'campaign',
-        consequences: ['Frequent public updates prioritised', 'Operational decisions temporarily deferred'], consequenceColors: ['green', 'amber'],
-        reaction: 'Trust-Building', reactionIcon: 'sentiment_satisfied',
+        id: 4, name: 'Focus on public communication and transparency', posture: 'Legitimacy-first posture', postureColor: 'purple', icon: 'campaign',
+        consequences: ['Frequent public updates and stakeholder briefings are prioritised', 'Operational decisions are temporarily deferred'], consequenceColors: ['green', 'amber'],
+        reactions: [
+          'Government: Supportive of transparency and trust-building',
+          'Customers: Reassured by communication, but still concerned about delays',
+          'Engineers: Neutral, awaiting technical clarity',
+          'Environmental Agency: Neutral, emphasising substance over messaging',
+        ],
         scores: { economy: -2, environment: 0, legitimacy: 7, resilience: 2 },
       },
       {
-        id: 5, name: 'Environmental Containment', posture: 'Environment-First', postureColor: 'emerald', icon: 'eco',
-        consequences: ['Resources diverted to prevent environmental damage', 'Economic recovery deprioritised'], consequenceColors: ['green', 'red'],
-        reaction: 'Environmentally Responsible', reactionIcon: 'park',
+        id: 5, name: 'Allocate resources to immediate environmental containment', posture: 'Environment-first posture', postureColor: 'emerald', icon: 'eco',
+        consequences: ['Resources are diverted to prevent potential environmental damage', 'Economic recovery is deprioritised in the short term'], consequenceColors: ['green', 'red'],
+        reactions: [
+          'Environmental Agency: Strongly supportive',
+          'Engineers: Supportive if actions reduce systemic risk',
+          'Government: Supportive but concerned about economic costs',
+          'Customers: Dissatisfied due to lack of operational focus',
+        ],
         scores: { economy: -4, environment: 8, legitimacy: 4, resilience: 5 },
       },
     ],
@@ -136,33 +160,58 @@ export const SCENARIOS: Scenario[] = [
     description: 'Initial emergency actions have been taken. Investigations are underway, responsibilities are being clarified, and stakeholders are now focused on accountability, recovery progress, and corrective actions.',
     actions: [
       {
-        id: 1, name: 'Full Regulatory Cooperation', posture: 'Compliance-First', postureColor: 'green', icon: 'gavel',
-        consequences: ['Full access to data and operations provided', 'Recovery slows but regulatory clarity improves'], consequenceColors: ['green', 'amber'],
-        reaction: 'Accountable', reactionIcon: 'verified',
+        id: 1, name: 'Fully cooperate with investigations and accept regulatory oversight', posture: 'Compliance-first accountability posture', postureColor: 'green', icon: 'gavel',
+        consequences: ['The company provides full access to data and operations', 'Recovery slows, but regulatory clarity improves'], consequenceColors: ['green', 'amber'],
+        reactions: [
+          'Government: Strongly supportive of accountability',
+          'Environmental Agency: Supportive due to transparency',
+          'Engineers: Supportive of evidence-based correction',
+          'Customers: Concerned about delays and cost implications',
+        ],
         scores: { economy: -4, environment: 2, legitimacy: 6, resilience: 3 },
       },
       {
-        id: 2, name: 'Negotiate Limited Penalties', posture: 'Pragmatic', postureColor: 'orange', icon: 'handshake',
-        consequences: ['Faster recovery through negotiated settlements', 'Some accountability concerns unresolved'], consequenceColors: ['green', 'amber'],
-        reaction: 'Wary', reactionIcon: 'sentiment_neutral',
+        id: 2, name: 'Negotiate limited penalties to accelerate recovery', posture: 'Pragmatic recovery posture', postureColor: 'orange', icon: 'handshake',
+        consequences: ['Faster recovery through negotiated settlements', 'Some accountability concerns remain unresolved'], consequenceColors: ['green', 'amber'],
+        reactions: [
+          'Government: Mixed, accepts pragmatism, wary of precedent',
+          'Customers: Supportive of faster normalisation',
+          'Environmental Agency: Concerned about diluted responsibility',
+          'Engineers: Neutral, depending on safeguards',
+        ],
         scores: { economy: 5, environment: -1, legitimacy: -2, resilience: 1 },
       },
       {
-        id: 3, name: 'Targeted Compensation & Remediation', posture: 'Stakeholder-Repair', postureColor: 'blue', icon: 'volunteer_activism',
-        consequences: ['Affected customers and communities compensated', 'Environmental remediation plans launched'], consequenceColors: ['green', 'green'],
-        reaction: 'Supportive', reactionIcon: 'sentiment_satisfied',
+        id: 3, name: 'Implement targeted compensation and remediation programmes', posture: 'Stakeholder-repair posture', postureColor: 'blue', icon: 'volunteer_activism',
+        consequences: ['Affected customers and communities receive compensation', 'Environmental remediation plans are launched'], consequenceColors: ['green', 'green'],
+        reactions: [
+          'Customers: Strongly supportive',
+          'Environmental Agency: Supportive of remediation focus',
+          'Government: Supportive but concerned about financial strain',
+          'Engineers: Neutral',
+        ],
         scores: { economy: -3, environment: 4, legitimacy: 4, resilience: 2 },
       },
       {
-        id: 4, name: 'Challenge Liability', posture: 'Defensive Legal', postureColor: 'red', icon: 'shield',
-        consequences: ['Legal exposure contested', 'Recovery continues amid public criticism'], consequenceColors: ['amber', 'red'],
-        reaction: 'Distrustful', reactionIcon: 'sentiment_dissatisfied',
+        id: 4, name: 'Challenge liability and delay accountability measures', posture: 'Defensive legal posture', postureColor: 'red', icon: 'shield',
+        consequences: ['Legal exposure is contested', 'Recovery continues amid public criticism'], consequenceColors: ['amber', 'red'],
+        reactions: [
+          'Government: Critical of avoidance behaviour',
+          'Customers: Increasingly distrustful',
+          'Environmental Agency: Strongly critical',
+          'Engineers: Concerned about unresolved risks',
+        ],
         scores: { economy: 2, environment: -3, legitimacy: -6, resilience: -4 },
       },
       {
-        id: 5, name: 'System Audits & Reforms', posture: 'Corrective Reform', postureColor: 'indigo', icon: 'build',
-        consequences: ['Independent audits identify weaknesses', 'Recovery slower but more robust'], consequenceColors: ['green', 'amber'],
-        reaction: 'Reform-Minded', reactionIcon: 'engineering',
+        id: 5, name: 'Invest in system audits and operational reforms', posture: 'Corrective reform posture', postureColor: 'indigo', icon: 'build',
+        consequences: ['Independent audits identify weaknesses', 'Recovery is slower but more robust'], consequenceColors: ['green', 'amber'],
+        reactions: [
+          'Engineers: Strongly supportive',
+          'Government: Supportive of reform',
+          'Environmental Agency: Supportive if reforms include safeguards',
+          'Customers: Impatient with slower recovery',
+        ],
         scores: { economy: -2, environment: 3, legitimacy: 3, resilience: 6 },
       },
     ],
@@ -174,33 +223,58 @@ export const SCENARIOS: Scenario[] = [
     description: 'The immediate crisis has passed. Recovery is underway. Attention now shifts to long-term strategy, organisational identity, and how the company positions itself for future resilience, sustainability, and stakeholder trust.',
     actions: [
       {
-        id: 1, name: 'Resilient & Sustainable Infrastructure', posture: 'Resilience-Sustainability', postureColor: 'emerald', icon: 'eco',
-        consequences: ['Significant investment in safer, greener systems', 'Short-term returns limited, long-term robustness improves'], consequenceColors: ['green', 'amber'],
-        reaction: 'Impressed', reactionIcon: 'sentiment_satisfied',
+        id: 1, name: 'Invest in long-term, resilient, and sustainable infrastructure', posture: 'Resilience-sustainability transformation posture', postureColor: 'emerald', icon: 'eco',
+        consequences: ['Significant investment in safer, greener, and more resilient systems', 'Short-term financial returns are limited, but long-term robustness improves'], consequenceColors: ['green', 'amber'],
+        reactions: [
+          'Engineers: Strongly supportive of system redesign',
+          'Environmental Agency: Strongly supportive of sustainability commitment',
+          'Government: Supportive of long-term risk reduction',
+          'Customers: Mixed, supportive in principle, concerned about costs',
+        ],
         scores: { economy: -2, environment: 6, legitimacy: 4, resilience: 8 },
       },
       {
-        id: 2, name: 'Industry Safety & Governance Leader', posture: 'Legitimacy Leadership', postureColor: 'purple', icon: 'workspace_premium',
-        consequences: ['Advocates for higher industry standards', 'Reputation improves, operational flexibility decreases'], consequenceColors: ['green', 'amber'],
-        reaction: 'Confident', reactionIcon: 'thumb_up',
+        id: 2, name: 'Position the company as an industry leader in safety and governance', posture: 'Legitimacy leadership posture', postureColor: 'purple', icon: 'workspace_premium',
+        consequences: ['The company advocates for higher industry standards and transparency', 'Reputation improves, but operational flexibility decreases'], consequenceColors: ['green', 'amber'],
+        reactions: [
+          'Government: Strongly supportive of leadership role',
+          'Customers: More confident in long-term reliability',
+          'Engineers: Supportive of standardisation',
+          'Environmental Agency: Supportive if standards include sustainability',
+        ],
         scores: { economy: 1, environment: 2, legitimacy: 7, resilience: 4 },
       },
       {
-        id: 3, name: 'Optimise Economic Competitiveness', posture: 'Efficiency-First', postureColor: 'red', icon: 'trending_up',
-        consequences: ['Cost efficiency and competitiveness prioritised', 'Safety and sustainability selectively implemented'], consequenceColors: ['green', 'red'],
-        reaction: 'Cautious', reactionIcon: 'sentiment_neutral',
+        id: 3, name: 'Optimise operations for long-term economic competitiveness', posture: 'Efficiency-first market posture', postureColor: 'red', icon: 'trending_up',
+        consequences: ['Cost efficiency and competitiveness are prioritised', 'Safety and sustainability investments are selectively implemented'], consequenceColors: ['green', 'red'],
+        reactions: [
+          'Customers: Supportive due to lower costs',
+          'Government: Cautious about risk trade-offs',
+          'Engineers: Concerned about long-term robustness',
+          'Environmental Agency: Critical of limited sustainability focus',
+        ],
         scores: { economy: 6, environment: -4, legitimacy: -3, resilience: -2 },
       },
       {
-        id: 4, name: 'Maintain Status Quo', posture: 'Status Quo', postureColor: 'slate', icon: 'do_not_disturb',
-        consequences: ['Major reforms avoided', 'Short-term stability preserved, vulnerabilities remain'], consequenceColors: ['amber', 'red'],
-        reaction: 'Watchful', reactionIcon: 'visibility',
+        id: 4, name: 'Maintain current practices with minimal long-term change', posture: 'Status-quo posture', postureColor: 'slate', icon: 'do_not_disturb',
+        consequences: ['The company avoids major reforms', 'Short-term stability is preserved, but vulnerabilities remain'], consequenceColors: ['amber', 'red'],
+        reactions: [
+          'Government: Neutral but watchful',
+          'Customers: Neutral to mildly concerned',
+          'Engineers: Concerned about unresolved risks',
+          'Environmental Agency: Critical of missed opportunity',
+        ],
         scores: { economy: 2, environment: -2, legitimacy: -2, resilience: -3 },
       },
       {
-        id: 5, name: 'Embed Crisis Lessons', posture: 'Learning-Oriented', postureColor: 'blue', icon: 'school',
-        consequences: ['Crisis lessons institutionalised through training', 'Improves preparedness without major structural overhaul'], consequenceColors: ['green', 'green'],
-        reaction: 'Supportive', reactionIcon: 'sentiment_satisfied',
+        id: 5, name: 'Embed crisis lessons into organisational learning and training', posture: 'Learning-oriented resilience posture', postureColor: 'blue', icon: 'school',
+        consequences: ['Crisis lessons are institutionalised through training and procedures', 'Improves preparedness without major structural overhaul'], consequenceColors: ['green', 'green'],
+        reactions: [
+          'Engineers: Supportive of learning-based improvement',
+          'Government: Supportive of preparedness',
+          'Environmental Agency: Moderately supportive',
+          'Customers: Neutral, benefits are indirect',
+        ],
         scores: { economy: 0, environment: 2, legitimacy: 3, resilience: 5 },
       },
     ],

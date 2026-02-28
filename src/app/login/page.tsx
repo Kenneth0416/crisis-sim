@@ -35,7 +35,6 @@ export default function LoginPage() {
           </div>
           <h2 className="text-slate-900 text-lg font-bold leading-tight tracking-tight">Crisis Sim 2024</h2>
         </div>
-        <span className="text-sm font-medium text-slate-500 hidden sm:block">Academic Session: Fall 2024</span>
       </header>
 
       <main className="flex-1 flex items-center justify-center p-4 sm:p-8">

@@ -9,7 +9,7 @@ import ProgressBar from '@/components/ProgressBar';
 
 export default function MiniGame1Page() {
   const router = useRouter();
-  const { sessionId, setMg1Result, addEvent } = useGameStore();
+  const { sessionId, studentId, setMg1Result, addEvent } = useGameStore();
   const [answers, setAnswers] = useState<Record<string, string[]>>({});
   const [error, setError] = useState('');
   const enterTime = useRef(Date.now());
@@ -32,7 +32,7 @@ export default function MiniGame1Page() {
     setError('');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     for (const s of STAKEHOLDERS) {
       if (!answers[s] || answers[s].length !== 3) {
         setError(`Please select exactly 3 concerns for each stakeholder.`);
@@ -40,8 +40,31 @@ export default function MiniGame1Page() {
       }
     }
     const duration = Date.now() - enterTime.current;
-    setMg1Result({ answers });
+    const result = { answers };
+    setMg1Result(result);
     addEvent('mg_submit', 'mg1', { answers, duration_ms: duration });
+    setError('');
+    try {
+      const response = await fetch('/api/session', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          run_id: sessionId,
+          user_id: studentId,
+          mini_game_id: 1,
+          score_delta: 0,
+          duration_ms: duration,
+          raw_result: result,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to save mini-game result');
+      }
+    } catch (err) {
+      console.error('Mini-game 1 save failed:', err);
+      setError('Failed to save your result. Please try again.');
+      return;
+    }
     router.push('/mini-game/2');
   };
 

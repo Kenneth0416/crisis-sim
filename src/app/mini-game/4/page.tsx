@@ -16,7 +16,7 @@ const COLOR_MAP: Record<string, string> = {
 
 export default function MiniGame4Page() {
   const router = useRouter();
-  const { sessionId, setMg4Result, addEvent } = useGameStore();
+  const { sessionId, studentId, setMg4Result, addEvent } = useGameStore();
   const [ranking, setRanking] = useState<Record<string, number>>({});
   const [error, setError] = useState('');
   const enterTime = useRef(Date.now());
@@ -32,14 +32,37 @@ export default function MiniGame4Page() {
     setError('');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const values = Object.values(ranking);
     if (values.length !== 4) { setError('Please assign a rank to all 4 dimensions.'); return; }
     const unique = new Set(values);
     if (unique.size !== 4) { setError('Each rank must be unique (1-4). No duplicates allowed.'); return; }
     const duration = Date.now() - enterTime.current;
-    setMg4Result({ ranking });
+    const result = { ranking };
+    setMg4Result(result);
     addEvent('mg_submit', 'mg4', { ranking, duration_ms: duration });
+    setError('');
+    try {
+      const response = await fetch('/api/session', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          run_id: sessionId,
+          user_id: studentId,
+          mini_game_id: 4,
+          score_delta: 0,
+          duration_ms: duration,
+          raw_result: result,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to save mini-game result');
+      }
+    } catch (err) {
+      console.error('Mini-game 4 save failed:', err);
+      setError('Failed to save your result. Please try again.');
+      return;
+    }
     router.push('/briefing');
   };
 

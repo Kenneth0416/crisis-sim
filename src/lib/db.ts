@@ -50,6 +50,15 @@ export interface EventRecord {
   client_ms_since_start: number;
 }
 
+export interface MiniGameEntry {
+  run_id: string;
+  user_id: string;
+  mini_game_id: number;
+  score_delta: number;
+  duration_ms: number;
+  raw_result: string;
+}
+
 export async function initDb() {
   await sql`
     CREATE TABLE IF NOT EXISTS sessions (
@@ -103,7 +112,22 @@ export async function initDb() {
       client_ms_since_start INTEGER DEFAULT 0
     )
   `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS mini_game_entries (
+      id SERIAL PRIMARY KEY,
+      run_id TEXT NOT NULL,
+      user_id TEXT NOT NULL,
+      mini_game_id INTEGER NOT NULL,
+      score_delta INTEGER DEFAULT 0,
+      duration_ms INTEGER DEFAULT 0,
+      raw_result TEXT DEFAULT '{}',
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      updated_at TIMESTAMPTZ DEFAULT NOW(),
+      UNIQUE (run_id, mini_game_id)
+    )
+  `;
   await sql`CREATE INDEX IF NOT EXISTS idx_events_session ON events(session_id)`;
+  await sql`CREATE INDEX IF NOT EXISTS idx_mini_game_entries_run ON mini_game_entries(run_id)`;
   // Migration: add columns for ref_q4-q6 if they don't exist
   await sql`ALTER TABLE sessions ADD COLUMN IF NOT EXISTS ref_q4 INTEGER DEFAULT 0`;
   await sql`ALTER TABLE sessions ADD COLUMN IF NOT EXISTS ref_q4_text TEXT DEFAULT ''`;
@@ -199,6 +223,23 @@ export async function saveEvents(sessionId: string, events: EventRecord[]) {
       VALUES (${e.session_id}, ${e.event_time}, ${e.event_type}, ${e.page_id}, ${e.payload_json}, ${e.client_ms_since_start})
     `;
   }
+}
+
+export async function saveMiniGameEntry(entry: MiniGameEntry) {
+  await sql`
+    INSERT INTO mini_game_entries (
+      run_id, user_id, mini_game_id, score_delta, duration_ms, raw_result
+    ) VALUES (
+      ${entry.run_id}, ${entry.user_id}, ${entry.mini_game_id},
+      ${entry.score_delta}, ${entry.duration_ms}, ${entry.raw_result}
+    )
+    ON CONFLICT (run_id, mini_game_id) DO UPDATE SET
+      user_id = EXCLUDED.user_id,
+      score_delta = EXCLUDED.score_delta,
+      duration_ms = EXCLUDED.duration_ms,
+      raw_result = EXCLUDED.raw_result,
+      updated_at = NOW()
+  `;
 }
 
 export async function getCompletedSessions(): Promise<SessionRecord[]> {

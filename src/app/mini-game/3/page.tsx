@@ -17,7 +17,7 @@ const COLOR_MAP: Record<string, string> = {
 
 export default function MiniGame3Page() {
   const router = useRouter();
-  const { sessionId, setMg3Result, addEvent } = useGameStore();
+  const { sessionId, studentId, setMg3Result, addEvent } = useGameStore();
   const [ranking, setRanking] = useState<Record<string, number>>({});
   const [error, setError] = useState('');
   const enterTime = useRef(Date.now());
@@ -33,14 +33,37 @@ export default function MiniGame3Page() {
     setError('');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const values = Object.values(ranking);
     if (values.length !== 5) { setError('Please assign a rank to all 5 sources.'); return; }
     const unique = new Set(values);
     if (unique.size !== 5) { setError('Each rank must be unique (1-5). No duplicates allowed.'); return; }
     const duration = Date.now() - enterTime.current;
-    setMg3Result({ ranking });
+    const result = { ranking };
+    setMg3Result(result);
     addEvent('mg_submit', 'mg3', { ranking, duration_ms: duration });
+    setError('');
+    try {
+      const response = await fetch('/api/session', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          run_id: sessionId,
+          user_id: studentId,
+          mini_game_id: 3,
+          score_delta: 0,
+          duration_ms: duration,
+          raw_result: result,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to save mini-game result');
+      }
+    } catch (err) {
+      console.error('Mini-game 3 save failed:', err);
+      setError('Failed to save your result. Please try again.');
+      return;
+    }
     router.push('/mini-game/4');
   };
 

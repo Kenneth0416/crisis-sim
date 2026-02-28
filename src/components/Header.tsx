@@ -14,7 +14,6 @@ export default function Header() {
         <div className="size-8 text-[#137fec] flex items-center justify-center bg-[#137fec]/10 rounded-lg">
           <span className="material-symbols-outlined text-2xl">emergency_home</span>
         </div>
-        <h2 className="text-slate-900 text-lg font-bold leading-tight tracking-tight">Crisis Sim 2024</h2>
       </div>
       <div className="flex items-center gap-3">
         {studentName && (

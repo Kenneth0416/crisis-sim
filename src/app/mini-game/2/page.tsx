@@ -16,7 +16,7 @@ const STAKEHOLDER_META = [
 
 export default function MiniGame2Page() {
   const router = useRouter();
-  const { sessionId, setMg2Result, addEvent } = useGameStore();
+  const { sessionId, studentId, setMg2Result, addEvent } = useGameStore();
   const [answers, setAnswers] = useState<Record<number, string[]>>({});
   const [error, setError] = useState('');
   const enterTime = useRef(Date.now());
@@ -39,7 +39,7 @@ export default function MiniGame2Page() {
     setError('');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     for (const stmt of TENSION_STATEMENTS) {
       if (!answers[stmt.id] || answers[stmt.id].length !== 2) {
         setError(`Please select exactly 2 stakeholders for each statement.`);
@@ -47,8 +47,31 @@ export default function MiniGame2Page() {
       }
     }
     const duration = Date.now() - enterTime.current;
-    setMg2Result({ answers });
+    const result = { answers };
+    setMg2Result(result);
     addEvent('mg_submit', 'mg2', { answers, duration_ms: duration });
+    setError('');
+    try {
+      const response = await fetch('/api/session', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          run_id: sessionId,
+          user_id: studentId,
+          mini_game_id: 2,
+          score_delta: 0,
+          duration_ms: duration,
+          raw_result: result,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to save mini-game result');
+      }
+    } catch (err) {
+      console.error('Mini-game 2 save failed:', err);
+      setError('Failed to save your result. Please try again.');
+      return;
+    }
     router.push('/mini-game/3');
   };
 

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { saveSession, getSessions, saveEvents } from '@/lib/db';
-import type { SessionRecord } from '@/lib/db';
+import { saveSession, getSessions, saveEvents, saveMiniGameEntry } from '@/lib/db';
+import type { SessionRecord, MiniGameEntry } from '@/lib/db';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,18 +12,18 @@ export async function POST(request: NextRequest) {
       start_time: body.start_time,
       end_time: body.end_time,
       total_duration_ms: body.total_duration_ms,
-      status: body.status || 'completed',
-      mg1_result_json: body.mg1_result_json || '{}',
-      mg2_result_json: body.mg2_result_json || '{}',
-      mg3_result_json: body.mg3_result_json || '{}',
-      mg4_result_json: body.mg4_result_json || '{}',
-      s1_choice: body.s1_choice || 0,
-      s2_choice: body.s2_choice || 0,
-      s3_choice: body.s3_choice || 0,
-      econ_total: body.econ_total || 50,
-      env_total: body.env_total || 50,
-      leg_total: body.leg_total || 50,
-      res_total: body.res_total || 50,
+      status: body.status ?? 'completed',
+      mg1_result_json: body.mg1_result_json ?? '{}',
+      mg2_result_json: body.mg2_result_json ?? '{}',
+      mg3_result_json: body.mg3_result_json ?? '{}',
+      mg4_result_json: body.mg4_result_json ?? '{}',
+      s1_choice: body.s1_choice ?? 0,
+      s2_choice: body.s2_choice ?? 0,
+      s3_choice: body.s3_choice ?? 0,
+      econ_total: body.econ_total ?? 50,
+      env_total: body.env_total ?? 50,
+      leg_total: body.leg_total ?? 50,
+      res_total: body.res_total ?? 50,
       cohort_n_at_view: 0,
       rank_econ: 0,
       rank_env: 0,
@@ -97,5 +97,38 @@ export async function PATCH(request: NextRequest) {
   } catch (error) {
     console.error('Session patch error:', error);
     return NextResponse.json({ error: 'Failed to update session' }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const runId = body.run_id ?? body.session_id;
+    const userId = body.user_id ?? body.student_id;
+    const miniGameId = Number(body.mini_game_id);
+    const scoreDelta = Number(body.score_delta ?? 0);
+    const durationMs = Number(body.duration_ms ?? 0);
+    const rawResult = typeof body.raw_result === 'string'
+      ? body.raw_result
+      : JSON.stringify(body.raw_result ?? {});
+
+    if (!runId || !userId || !Number.isFinite(miniGameId)) {
+      return NextResponse.json({ error: 'Missing run_id, user_id, or mini_game_id' }, { status: 400 });
+    }
+
+    const entry: MiniGameEntry = {
+      run_id: runId,
+      user_id: userId,
+      mini_game_id: miniGameId,
+      score_delta: Number.isFinite(scoreDelta) ? scoreDelta : 0,
+      duration_ms: Number.isFinite(durationMs) ? durationMs : 0,
+      raw_result: rawResult,
+    };
+
+    await saveMiniGameEntry(entry);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Mini-game save error:', error);
+    return NextResponse.json({ error: 'Failed to save mini-game result' }, { status: 500 });
   }
 }

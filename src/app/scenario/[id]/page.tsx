@@ -20,7 +20,7 @@ const DOT_COLORS: Record<string, string> = {
 export default function ScenarioPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const scenarioId = parseInt(id);
-  const scenario = SCENARIOS[scenarioId - 1];
+  const scenario = SCENARIOS.find((entry) => entry.id === scenarioId);
   const router = useRouter();
   const { sessionId, setScenarioChoice, addEvent } = useGameStore();
   const [selectedAction, setSelectedAction] = useState<number | null>(null);
@@ -118,11 +118,15 @@ export default function ScenarioPage({ params }: { params: Promise<{ id: string 
                       </ul>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-slate-500 uppercase mb-1">Reaction</p>
-                      <div className="flex items-center gap-2 text-sm text-slate-700 bg-slate-100 rounded px-2 py-1.5">
-                        <span className="material-symbols-outlined text-base">{action.reactionIcon}</span>
-                        <span>{action.reaction}</span>
-                      </div>
+                      <p className="text-xs font-semibold text-slate-500 uppercase mb-1">Stakeholder reactions</p>
+                      <ul className="text-sm text-slate-600 space-y-1">
+                        {action.reactions.map((reaction, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-[10px] text-slate-400 mt-1">●</span>
+                            <span>{reaction}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                   <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-end">

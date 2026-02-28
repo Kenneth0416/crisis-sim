@@ -32,6 +32,7 @@ interface GameState {
 
   // Scenario results
   scenarioChoices: Record<number, number>; // scenario_id -> action_id
+  scenarioScoreDeltas: Record<number, Scores>; // scenario_id -> score delta
   scores: Scores;
 
   // Events log
@@ -51,6 +52,22 @@ interface GameState {
 }
 
 const initialScores: Scores = { economy: 50, environment: 50, legitimacy: 50, resilience: 50 };
+export const clampScore = (value: number) => Math.max(0, Math.min(100, value));
+export const calculateScores = (deltas: Record<number, Scores>) => {
+  const totals: Scores = { ...initialScores };
+  for (const delta of Object.values(deltas)) {
+    totals.economy += delta.economy;
+    totals.environment += delta.environment;
+    totals.legitimacy += delta.legitimacy;
+    totals.resilience += delta.resilience;
+  }
+  return {
+    economy: clampScore(totals.economy),
+    environment: clampScore(totals.environment),
+    legitimacy: clampScore(totals.legitimacy),
+    resilience: clampScore(totals.resilience),
+  };
+};
 
 export const useGameStore = create<GameState>((set, get) => ({
   sessionId: '',
@@ -63,6 +80,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   mg3Result: null,
   mg4Result: null,
   scenarioChoices: {},
+  scenarioScoreDeltas: {},
   scores: { ...initialScores },
   events: [],
 
@@ -77,6 +95,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     mg3Result: null,
     mg4Result: null,
     scenarioChoices: {},
+    scenarioScoreDeltas: {},
     scores: { ...initialScores },
     events: [],
   }),
@@ -88,15 +107,15 @@ export const useGameStore = create<GameState>((set, get) => ({
   setMg3Result: (result) => set({ mg3Result: result }),
   setMg4Result: (result) => set({ mg4Result: result }),
 
-  setScenarioChoice: (scenarioId, actionId, scoreDelta) => set((state) => ({
-    scenarioChoices: { ...state.scenarioChoices, [scenarioId]: actionId },
-    scores: {
-      economy: Math.max(0, Math.min(100, state.scores.economy + scoreDelta.economy)),
-      environment: Math.max(0, Math.min(100, state.scores.environment + scoreDelta.environment)),
-      legitimacy: Math.max(0, Math.min(100, state.scores.legitimacy + scoreDelta.legitimacy)),
-      resilience: Math.max(0, Math.min(100, state.scores.resilience + scoreDelta.resilience)),
-    },
-  })),
+  setScenarioChoice: (scenarioId, actionId, scoreDelta) => set((state) => {
+    const nextScenarioChoices = { ...state.scenarioChoices, [scenarioId]: actionId };
+    const nextScenarioScoreDeltas = { ...state.scenarioScoreDeltas, [scenarioId]: scoreDelta };
+    return {
+      scenarioChoices: nextScenarioChoices,
+      scenarioScoreDeltas: nextScenarioScoreDeltas,
+      scores: calculateScores(nextScenarioScoreDeltas),
+    };
+  }),
 
   addEvent: (type, pageId, payload) => set((state) => ({
     events: [...state.events, {
@@ -121,6 +140,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     mg3Result: null,
     mg4Result: null,
     scenarioChoices: {},
+    scenarioScoreDeltas: {},
     scores: { ...initialScores },
     events: [],
   }),

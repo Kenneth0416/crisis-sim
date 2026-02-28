@@ -24,45 +24,46 @@ const DIM_CONFIG = [
 export default function ComparisonPage() {
   const router = useRouter();
   const store = useGameStore();
-  const { sessionId, scores, studentName } = store;
+  const { sessionId, scores } = store;
   const [ranks, setRanks] = useState<RankData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!sessionId) { router.replace('/login'); return; }
-    store.addEvent('page_enter', 'board', {});
+    useGameStore.getState().addEvent('page_enter', 'board', {});
 
     const submitAndFetch = async () => {
       try {
+        const snapshot = useGameStore.getState();
         // Save session first
         await fetch('/api/session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            session_id: store.sessionId,
-            student_id: store.studentId,
-            name: store.studentName,
-            start_time: new Date(store.startTime).toISOString(),
+            session_id: snapshot.sessionId,
+            student_id: snapshot.studentId,
+            name: snapshot.studentName,
+            start_time: new Date(snapshot.startTime).toISOString(),
             end_time: new Date().toISOString(),
-            total_duration_ms: store.getElapsedMs(),
+            total_duration_ms: snapshot.getElapsedMs(),
             status: 'completed',
-            mg1_result_json: JSON.stringify(store.mg1Result),
-            mg2_result_json: JSON.stringify(store.mg2Result),
-            mg3_result_json: JSON.stringify(store.mg3Result),
-            mg4_result_json: JSON.stringify(store.mg4Result),
-            s1_choice: store.scenarioChoices[1] || 0,
-            s2_choice: store.scenarioChoices[2] || 0,
-            s3_choice: store.scenarioChoices[3] || 0,
-            econ_total: store.scores.economy,
-            env_total: store.scores.environment,
-            leg_total: store.scores.legitimacy,
-            res_total: store.scores.resilience,
-            events: store.events,
+            mg1_result_json: JSON.stringify(snapshot.mg1Result),
+            mg2_result_json: JSON.stringify(snapshot.mg2Result),
+            mg3_result_json: JSON.stringify(snapshot.mg3Result),
+            mg4_result_json: JSON.stringify(snapshot.mg4Result),
+            s1_choice: snapshot.scenarioChoices[1] ?? 0,
+            s2_choice: snapshot.scenarioChoices[2] ?? 0,
+            s3_choice: snapshot.scenarioChoices[3] ?? 0,
+            econ_total: snapshot.scores.economy,
+            env_total: snapshot.scores.environment,
+            leg_total: snapshot.scores.legitimacy,
+            res_total: snapshot.scores.resilience,
+            events: snapshot.events,
           }),
         });
 
         // Fetch ranks
-        const res = await fetch(`/api/comparison?session_id=${store.sessionId}`);
+        const res = await fetch(`/api/comparison?session_id=${snapshot.sessionId}`);
         const data = await res.json();
         setRanks(data);
       } catch (err) {
