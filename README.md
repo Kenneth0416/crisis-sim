@@ -1,51 +1,51 @@
-# Crisis Simulation Game - 危機管理模擬系統
+# Crisis Simulation Game - Corporate Crisis Management Simulator
 
 ![Crisis Sim](docs/screenshots/01-login.png)
 
-一個互動式的企業危機管理教育模擬系統，幫助學習者在高壓情境下培養決策思維、危機應對與策略規劃能力。
+An interactive educational simulation system for corporate crisis management, helping learners develop decision-making thinking, crisis response, and strategic planning capabilities in high-pressure scenarios.
 
 ---
 
-## 目錄
+## Table of Contents
 
-1. [系統特色](#系統特色)
-2. [技術架構](#技術架構)
-3. [功能模組](#功能模組)
-4. [操作教學](#操作教學)
-5. [安裝指南](#安裝指南)
-6. [API 接口](#api-接口)
-7. [項目結構](#項目結構)
-8. [部署說明](#部署說明)
-9. [開發者指南](#開發者指南)
-
----
-
-## 系統特色
-
-### 🎮 沉浸式學習體驗
-
-- **4 個互動小遊戲** - 培養危機敏感度與分析能力
-- **3 個危機情境** - 模擬真實企業危機決策
-- **即時分數反饋** - 四維度評估決策效果
-
-### 📊 多維度評估系統
-
-| 維度 | 說明 | 評估指標 |
-|------|------|----------|
-| 經濟 Economy | 財務影響、投資者信心 | 成本效益、風險暴露 |
-| 環境 Environment | 生態影響、可持續性 | 環境修復、長期影響 |
-| 合規 Legitimacy | 公眾信任、品牌聲譽 | 媒體反應、監管合規 |
-| 韌性 Resilience | 營運連續性、適應能力 | 恢復速度、應變機制 |
-
-### 🏆 成績比較系統
-
-- 與同期學生比較排名
-- 詳細維度分析
-- 雷達圖可視化（規劃中）
+1. [Features](#features)
+2. [Technical Architecture](#technical-architecture)
+3. [Functional Modules](#functional-modules)
+4. [User Guide](#user-guide)
+5. [Installation](#installation)
+6. [API Endpoints](#api-endpoints)
+7. [Project Structure](#project-structure)
+8. [Deployment](#deployment)
+9. [Developer Guide](#developer-guide)
 
 ---
 
-## 技術架構
+## Features
+
+### 🎮 Immersive Learning Experience
+
+- **4 Interactive Mini-Games** - Build crisis sensitivity and analysis skills
+- **3 Crisis Scenarios** - Simulate real corporate crisis decisions
+- **Real-time Score Feedback** - Four-dimensional decision evaluation
+
+### 📊 Multi-Dimensional Assessment System
+
+| Dimension | Description | Evaluation Metrics |
+|-----------|-------------|-------------------|
+| Economy | Financial impact, investor confidence | Cost-benefit, risk exposure |
+| Environment | Ecological impact, sustainability | Environmental remediation, long-term impact |
+| Legitimacy | Public trust, brand reputation | Media reaction, regulatory compliance |
+| Resilience | Operational continuity, adaptability | Recovery speed, response mechanisms |
+
+### 🏆 Performance Comparison System
+
+- Compare rankings with peers
+- Detailed dimension analysis
+- Radar chart visualization (planned)
+
+---
+
+## Technical Architecture
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -72,329 +72,329 @@
 └─────────────────────────────────────────────────────┘
 ```
 
-### 技術棧
+### Tech Stack
 
-- **框架**: Next.js 16 (App Router + Turbopack)
+- **Framework**: Next.js 16 (App Router + Turbopack)
 - **UI**: React 19, Tailwind CSS 4
-- **狀態管理**: Zustand
-- **數據庫**: PostgreSQL (Neon Serverless)
-- **導出**: XLSX
+- **State Management**: Zustand
+- **Database**: PostgreSQL (Neon Serverless)
+- **Export**: XLSX
 
 ---
 
-## 功能模組
+## Functional Modules
 
-### 1. 登入系統
+### 1. Login System
 
 ![Login](docs/screenshots/01-login.png)
 
-輸入暱稱即可開始體驗，無需註冊。
+Enter a nickname to start the experience, no registration required.
 
-### 2. 知情同意
+### 2. Consent Form
 
 ![Consent](docs/screenshots/03-consent.png)
 
-說明數據收集用途，確保學術倫理合規。
+Explain data collection purposes and ensure academic ethics compliance.
 
-### 3. 小遊戲模組
+### 3. Mini-Game Modules
 
-#### Mini-Game 1: 優先排序
+#### Mini-Game 1: Priority Ranking
 
 ![Mini-Game 1](docs/screenshots/05-mini-game-1.png)
 
-根據利害關係人的角色，選擇他們最關心的 3 個議題。
+Based on stakeholder roles, select the 3 issues they care about most.
 
-#### Mini-Game 2: 張力識別
+#### Mini-Game 2: Tension Identification
 
 ![Mini-Game 2](docs/screenshots/06-mini-game-2.png)
 
-識別危機中不同立場的衝突點。
+Identify conflict points between different stakeholders in a crisis.
 
-#### Mini-Game 3: 訊息可信度
+#### Mini-Game 3: Information Credibility
 
 ![Mini-Game 3](docs/screenshots/07-mini-game-3.png)
 
-評估不同資訊來源的可信度。
+Evaluate the credibility of different information sources.
 
-#### Mini-Game 4: 影響預測
+#### Mini-Game 4: Impact Anticipation
 
 ![Mini-Game 4](docs/screenshots/08-mini-game-4.png)
 
-預測決策的多元影響。
+Predict the multiple impacts of decisions.
 
-### 4. 簡報過渡頁
+### 4. Briefing Transition Page
 
 ![Briefing](docs/screenshots/09-briefing.png)
 
-預覽即將面對的四維度評估框架。
+Preview the four-dimensional assessment framework ahead.
 
-### 5. 危機情境
+### 5. Crisis Scenarios
 
-#### Scenario 1: 緊急應變
+#### Scenario 1: Immediate Response
 
 ![Scenario](docs/screenshots/10-scenario-1.png)
 
-危機爆發初期，資訊不完全時的初始決策。
+Initial decisions during crisis outbreak with incomplete information.
 
-#### Scenario 2: 恢復與問責
+#### Scenario 2: Recovery & Accountability
 
 ![Scenario 2](docs/screenshots/11-scenario-2.png)
 
-短期穩定後的責任歸屬與補救措施。
+Responsibility attribution and remedial measures after short-term stabilization.
 
-#### Scenario 3: 長期定位
+#### Scenario 3: Long-Term Positioning
 
 ![Scenario 3](docs/screenshots/12-scenario-3.png)
 
-為未來韌性進行的策略佈局。
+Strategic positioning for future resilience.
 
-### 6. 成績比較
+### 6. Performance Comparison
 
 ![Comparison](docs/screenshots/13-comparison.png)
 
-與同期學習者比較四維度表現與排名。
+Compare four-dimensional performance and rankings with peers.
 
-### 7. 反思筆記
+### 7. Reflection Notes
 
 ![Reflection](docs/screenshots/14-reflection.png)
 
-強制性反思環節，記錄學習心得與改進建議。
+Mandatory reflection session to record learning insights and improvement suggestions.
 
-### 8. 完成頁面
+### 8. Completion Page
 
 ![Finish](docs/screenshots/15-finish.png)
 
-感謝參與，數據已記錄。
+Thank you for participating, data has been recorded.
 
-### 9. 管理員儀表板
+### 9. Admin Dashboard
 
 ![Admin](docs/screenshots/16-admin.png)
 
-查看所有學習記錄、導出數據。
+View all learning records and export data.
 
 ---
 
-## 操作教學
+## User Guide
 
-### 基本流程
+### Basic Flow
 
 ```
-登入 → 同意 → 小遊戲(1-4) → 情境(1-3) → 比較 → 反思 → 完成
+Login → Consent → Mini-Games (1-4) → Scenarios (1-3) → Comparison → Reflection → Finish
 ```
 
-### 逐步指南
+### Step-by-Step Guide
 
-#### Step 1: 開始體驗
+#### Step 1: Start Experience
 
-1. 訪問 http://localhost:3000
-2. 輸入暱稱（如 `Alex`）
-3. 點擊「Start Simulation」
+1. Visit http://localhost:3000
+2. Enter a nickname (e.g., `Alex`)
+3. Click "Start Simulation"
 
-#### Step 2: 閱讀同意書
+#### Step 2: Read Consent Form
 
-1. 勾選「我同意」
-2. 點擊「Continue to Simulation」
+1. Check "I agree"
+2. Click "Continue to Simulation"
 
-#### Step 3: 完成小遊戲
+#### Step 3: Complete Mini-Games
 
-每個小遊戲需要完成指定任務：
+Each mini-game requires completing specific tasks:
 
-| 小遊戲 | 任務 |
-|--------|------|
-| MG-1 | 為每個利害關係人選擇 3 個最關心的議題 |
-| MG-2 | 識別各方立場的張力點 |
-| MG-3 | 排列訊息來源的可信度 |
-| MG-4 | 預測不同決策的影響 |
+| Mini-Game | Task |
+|-----------|------|
+| MG-1 | Select 3 most important issues for each stakeholder |
+| MG-2 | Identify tension points between different positions |
+| MG-3 | Rank information source credibility |
+| MG-4 | Predict impacts of different decisions |
 
-#### Step 4: 情境決策
+#### Step 4: Scenario Decisions
 
 ![Scenario Mobile](docs/screenshots/18-mobile-scenario.png)
 
-每個情境提供 5 個選項，選擇後會即時計算分數影響。
+Each scenario provides 5 options, and score impacts are calculated in real-time.
 
-#### Step 5: 查看結果
+#### Step 5: View Results
 
-完成後查看：
-- 總分（400 分滿分）
-- 四維度分數
-- 排名百分比
+After completion, view:
+- Total score (400 points max)
+- Four-dimensional scores
+- Ranking percentage
 
-#### Step 6: 提交反思
+#### Step 6: Submit Reflection
 
-回答 6 個結構化問題 + 1 個開放式建議。
+Answer 6 structured questions + 1 open-ended suggestion.
 
 ---
 
-## 安裝指南
+## Installation
 
-### 前置需求
+### Prerequisites
 
 - Node.js 18+
-- PostgreSQL 數據庫（可使用 Neon 免費方案）
+- PostgreSQL database (Neon free tier available)
 
-### 安裝步驟
+### Installation Steps
 
 ```bash
-# 1. 克隆項目
+# 1. Clone the repository
 git clone https://github.com/Kenneth0416/crisis-sim.git
 cd crisis-sim
 
-# 2. 安裝依賴
+# 2. Install dependencies
 npm install
 
-# 3. 創建環境變量
-# 創建 .env.local 文件
+# 3. Create environment variables
+# Create .env.local file
 echo "DATABASE_URL=your_neon_database_url" > .env.local
 
-# 4. 初始化數據庫
+# 4. Initialize database
 curl http://localhost:3000/api/init-db
 
-# 5. 啟動開發服務器
+# 5. Start development server
 npm run dev
 ```
 
-訪問 http://localhost:3000 開始體驗。
+Visit http://localhost:3000 to start.
 
-### Docker 部署（可選）
+### Docker Deployment (Optional)
 
 ```bash
-# 使用 Docker Compose
+# Using Docker Compose
 docker-compose up -d
 ```
 
 ---
 
-## API 接口
+## API Endpoints
 
-| 接口 | 方法 | 說明 |
-|------|------|------|
-| `/api/init-db` | GET | 初始化數據庫表 |
-| `/api/session` | POST | 創建遊戲會話 |
-| `/api/session` | PUT | 更新迷你遊戲結果 |
-| `/api/session` | PATCH | 更新反思內容 |
-| `/api/event` | POST | 記錄用戶行為事件 |
-| `/api/comparison` | GET | 獲取成績比較數據 |
-| `/api/export` | GET | 導出為 XLSX |
-| `/api/admin` | GET | 管理員獲取所有數據 |
-| `/api/admin` | DELETE | 刪除指定會話 |
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/init-db` | GET | Initialize database tables |
+| `/api/session` | POST | Create game session |
+| `/api/session` | PUT | Update mini-game results |
+| `/api/session` | PATCH | Update reflection content |
+| `/api/event` | POST | Record user behavior events |
+| `/api/comparison` | GET | Get performance comparison data |
+| `/api/export` | GET | Export as XLSX |
+| `/api/admin` | GET | Admin get all data |
+| `/api/admin` | DELETE | Delete specific session |
 
 ---
 
-## 項目結構
+## Project Structure
 
 ```
 src/
 ├── app/                    # Next.js App Router
-│   ├── admin/             # 管理員儀表板
-│   ├── api/               # API 路由
-│   │   ├── init-db/      # 數據庫初始化
-│   │   ├── session/      # 會話管理
-│   │   ├── event/        # 事件記錄
-│   │   ├── comparison/   # 成績比較
-│   │   ├── export/       # 數據導出
-│   │   └── admin/        # 管理員接口
-│   ├── briefing/         # 簡報過渡頁
-│   ├── comparison/       # 成績比較頁
-│   ├── consent/          # 知情同意頁
-│   ├── finish/           # 完成頁
-│   ├── login/            # 登入頁
-│   ├── mini-game/       # 4個小遊戲
+│   ├── admin/             # Admin dashboard
+│   ├── api/               # API routes
+│   │   ├── init-db/      # Database initialization
+│   │   ├── session/      # Session management
+│   │   ├── event/        # Event logging
+│   │   ├── comparison/  # Performance comparison
+│   │   ├── export/       # Data export
+│   │   └── admin/        # Admin endpoints
+│   ├── briefing/         # Briefing transition page
+│   ├── comparison/       # Performance comparison page
+│   ├── consent/          # Consent form page
+│   ├── finish/           # Completion page
+│   ├── login/            # Login page
+│   ├── mini-game/       # 4 mini-games
 │   │   ├── 1/
 │   │   ├── 2/
 │   │   ├── 3/
 │   │   └── 4/
-│   ├── reflection/       # 反思頁
-│   └── scenario/         # 3個危機情境
+│   ├── reflection/       # Reflection page
+│   └── scenario/         # 3 crisis scenarios
 │       └── [id]/
-├── components/            # 共享組件
-│   ├── Header.tsx        # 頂部導航
-│   └── ProgressBar.tsx   # 進度條
-└── lib/                   # 工具函數
-    ├── db.ts             # 數據庫連接
-    ├── game-data.ts      # 遊戲配置數據
-    └── store.ts          # Zustand 狀態存儲
+├── components/            # Shared components
+│   ├── Header.tsx        # Top navigation
+│   └── ProgressBar.tsx   # Progress bar
+└── lib/                   # Utility functions
+    ├── db.ts             # Database connection
+    ├── game-data.ts      # Game configuration data
+    └── store.ts          # Zustand state store
 ```
 
 ---
 
-## 部署說明
+## Deployment
 
-### Vercel 部署（推薦）
+### Vercel Deployment (Recommended)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Kenneth0416/crisis-sim)
 
-1. 點擊上方按鈕
-2. 連接 GitHub
-3. 設置 `DATABASE_URL` 環境變量
-4. 部署完成
+1. Click the button above
+2. Connect GitHub
+3. Set `DATABASE_URL` environment variable
+4. Deployment complete
 
-### 環境變量
+### Environment Variables
 
-| 變量 | 說明 | 示例 |
-|------|------|------|
-| `DATABASE_URL` | Neon PostgreSQL 連接字符串 | `postgres://user:pass@host/neon` |
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DATABASE_URL` | Neon PostgreSQL connection string | `postgres://user:pass@host/neon` |
 
 ---
 
-## 開發者指南
+## Developer Guide
 
-### 運行測試
+### Run Tests
 
 ```bash
 npm test
 ```
 
-### 截圖指南
+### Screenshot Guide
 
 ```bash
-# 安裝 Playwright
+# Install Playwright
 npm install -D playwright @playwright/test
 
-# 啟動開發服務器
+# Start development server
 npm run dev
 
-# 運行截圖腳本
+# Run screenshot script
 node screenshot.js
 ```
 
-截圖保存在 `docs/screenshots/` 目錄。
+Screenshots are saved in `docs/screenshots/` directory.
 
-### 添加新情境
+### Adding New Scenarios
 
-1. 編輯 `src/lib/game-data.ts` 中的 `SCENARIOS` 數組
-2. 定義情境標題、描述、5 個可選決策
-3. 每個決策包含：名稱、圖標、後果、維度分數
+1. Edit the `SCENARIOS` array in `src/lib/game-data.ts`
+2. Define scenario title, description, 5 optional decisions
+3. Each decision includes: name, icon, consequences, dimension scores
 
-### 添加新小遊戲
+### Adding New Mini-Games
 
-1. 在 `src/app/mini-game/` 創建新目錄
-2. 實現遊戲邏輯組件
-3. 更新 `src/lib/game-data.ts` 中的遊戲列表
-
----
-
-## 常見問題
-
-### Q: 數據庫連接失敗？
-
-A: 確認 `.env.local` 中的 `DATABASE_URL` 正確，可在 Neon 儀表板獲取連接字符串。
-
-### Q: 如何導出學生數據？
-
-A: 訪問 `/admin` 頁面，點擊「Export XLSX」按鈕。
-
-### Q: 支持移動端嗎？
-
-A: 是的，響應式設計支持手機和平板訪問。
+1. Create new directory in `src/app/mini-game/`
+2. Implement game logic component
+3. Update game list in `src/lib/game-data.ts`
 
 ---
 
-## 許可
+## FAQ
 
-本項目僅供教育和研究使用。
+### Q: Database connection failed?
+
+A: Verify `DATABASE_URL` in `.env.local` is correct. Get connection string from Neon dashboard.
+
+### Q: How to export student data?
+
+A: Visit `/admin` page, click "Export XLSX" button.
+
+### Q: Is mobile supported?
+
+A: Yes, responsive design supports mobile and tablet access.
 
 ---
 
-## 聯繫
+## License
 
-如有問題，請提交 Issue 或聯繫項目維護者。
+This project is for educational and research purposes only.
+
+---
+
+## Contact
+
+For issues, please submit an Issue or contact the project maintainer.
