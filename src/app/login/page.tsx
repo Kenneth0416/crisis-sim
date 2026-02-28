@@ -33,7 +33,7 @@ export default function LoginPage() {
           <div className="size-8 flex items-center justify-center text-[#137fec]">
             <span className="material-symbols-outlined text-3xl">emergency</span>
           </div>
-          <h2 className="text-slate-900 text-lg font-bold leading-tight tracking-tight">Crisis Sim 2024</h2>
+          <h2 className="text-slate-900 text-lg font-bold leading-tight tracking-tight">Crisis Sim</h2>
         </div>
       </header>
 
