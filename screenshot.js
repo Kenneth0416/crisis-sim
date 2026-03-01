@@ -274,6 +274,14 @@ async function main() {
   await page.waitForTimeout(1000);
   await screenshot('28-mobile-scenario');
 
+  // ===== TABLET LANDSCAPE =====
+  console.log('\n=== Tablet Landscape ===');
+  await page.setViewportSize({ width: 1024, height: 768 });
+
+  await page.goto(`${baseUrl}/scenario/1`);
+  await page.waitForTimeout(1000);
+  await screenshot('29-tablet-scenario');
+
   await browser.close();
   console.log('\n✅ All screenshots captured!\n');
 }

@@ -208,7 +208,7 @@ Each mini-game requires completing specific tasks:
 
 #### Step 4: Scenario Decisions
 
-![Scenario Mobile](docs/screenshots/28-mobile-scenario.png)
+![Scenario Tablet](docs/screenshots/29-tablet-scenario.png)
 
 Each scenario provides 5 options, and score impacts are calculated in real-time.
 
@@ -343,21 +343,6 @@ src/
 ```bash
 npm test
 ```
-
-### Screenshot Guide
-
-```bash
-# Install Playwright
-npm install -D playwright @playwright/test
-
-# Start development server
-npm run dev
-
-# Run screenshot script
-node screenshot.js
-```
-
-Screenshots are saved in `docs/screenshots/` directory.
 
 ### Adding New Scenarios
 
