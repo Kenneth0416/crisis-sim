@@ -11,7 +11,7 @@ export default function BriefingPage() {
   const { sessionId, addEvent } = useGameStore();
 
   useEffect(() => {
-    if (!sessionId) { router.replace('/login'); return; }
+    if (!sessionId && process.env.NEXT_PUBLIC_DEMO_MODE !== 'true') { router.replace('/login'); return; }
     addEvent('page_enter', 'briefing', {});
   }, [sessionId, router, addEvent]);
 

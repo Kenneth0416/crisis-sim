@@ -31,7 +31,7 @@ export default function ScenarioPage({ params }: { params: Promise<{ id: string 
   const stepId = `s${scenarioId}` as 's1' | 's2' | 's3';
 
   useEffect(() => {
-    if (!sessionId) { router.replace('/login'); return; }
+    if (!sessionId && process.env.NEXT_PUBLIC_DEMO_MODE !== 'true') { router.replace('/login'); return; }
     addEvent('page_enter', stepId, {});
     enterTime.current = Date.now();
     setSelectedAction(null);

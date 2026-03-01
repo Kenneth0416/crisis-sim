@@ -106,25 +106,25 @@ Based on stakeholder roles, select the 3 issues they care about most.
 
 #### Mini-Game 2: Tension Identification
 
-![Mini-Game 2](docs/screenshots/06-mini-game-2.png)
+![Mini-Game 2](docs/screenshots/07-mini-game-2.png)
 
 Identify conflict points between different stakeholders in a crisis.
 
 #### Mini-Game 3: Information Credibility
 
-![Mini-Game 3](docs/screenshots/07-mini-game-3.png)
+![Mini-Game 3](docs/screenshots/09-mini-game-3.png)
 
 Evaluate the credibility of different information sources.
 
 #### Mini-Game 4: Impact Anticipation
 
-![Mini-Game 4](docs/screenshots/08-mini-game-4.png)
+![Mini-Game 4](docs/screenshots/11-mini-game-4.png)
 
 Predict the multiple impacts of decisions.
 
 ### 4. Briefing Transition Page
 
-![Briefing](docs/screenshots/09-briefing.png)
+![Briefing](docs/screenshots/13-briefing.png)
 
 Preview the four-dimensional assessment framework ahead.
 
@@ -132,43 +132,43 @@ Preview the four-dimensional assessment framework ahead.
 
 #### Scenario 1: Immediate Response
 
-![Scenario](docs/screenshots/10-scenario-1.png)
+![Scenario](docs/screenshots/14-scenario-1.png)
 
 Initial decisions during crisis outbreak with incomplete information.
 
 #### Scenario 2: Recovery & Accountability
 
-![Scenario 2](docs/screenshots/11-scenario-2.png)
+![Scenario 2](docs/screenshots/16-scenario-2.png)
 
 Responsibility attribution and remedial measures after short-term stabilization.
 
 #### Scenario 3: Long-Term Positioning
 
-![Scenario 3](docs/screenshots/12-scenario-3.png)
+![Scenario 3](docs/screenshots/18-scenario-3.png)
 
 Strategic positioning for future resilience.
 
 ### 6. Performance Comparison
 
-![Comparison](docs/screenshots/13-comparison.png)
+![Comparison](docs/screenshots/20-comparison.png)
 
 Compare four-dimensional performance and rankings with peers.
 
 ### 7. Reflection Notes
 
-![Reflection](docs/screenshots/14-reflection.png)
+![Reflection](docs/screenshots/21-reflection.png)
 
 Mandatory reflection session to record learning insights and improvement suggestions.
 
 ### 8. Completion Page
 
-![Finish](docs/screenshots/15-finish.png)
+![Finish](docs/screenshots/24-finish.png)
 
 Thank you for participating, data has been recorded.
 
 ### 9. Admin Dashboard
 
-![Admin](docs/screenshots/16-admin.png)
+![Admin](docs/screenshots/25-admin.png)
 
 View all learning records and export data.
 
@@ -208,7 +208,7 @@ Each mini-game requires completing specific tasks:
 
 #### Step 4: Scenario Decisions
 
-![Scenario Mobile](docs/screenshots/18-mobile-scenario.png)
+![Scenario Mobile](docs/screenshots/28-mobile-scenario.png)
 
 Each scenario provides 5 options, and score impacts are calculated in real-time.
 

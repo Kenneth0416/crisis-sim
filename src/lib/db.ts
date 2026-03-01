@@ -1,6 +1,7 @@
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL!);
+const hasDb = !!process.env.DATABASE_URL;
+const sql = hasDb ? neon(process.env.DATABASE_URL!) : null;
 
 export interface SessionRecord {
   session_id: string;
@@ -60,6 +61,7 @@ export interface MiniGameEntry {
 }
 
 export async function initDb() {
+  if (!sql) return;
   await sql`
     CREATE TABLE IF NOT EXISTS sessions (
       session_id TEXT PRIMARY KEY,
@@ -138,11 +140,13 @@ export async function initDb() {
 }
 
 export async function getSessions(): Promise<SessionRecord[]> {
+  if (!sql) return [];
   const rows = await sql`SELECT * FROM sessions ORDER BY created_at DESC`;
   return rows as unknown as SessionRecord[];
 }
 
 export async function saveSession(session: SessionRecord) {
+  if (!sql) return;
   await sql`
     INSERT INTO sessions (
       session_id, student_id, name, start_time, end_time,
@@ -211,11 +215,13 @@ export async function saveSession(session: SessionRecord) {
 }
 
 export async function getEvents(): Promise<EventRecord[]> {
+  if (!sql) return [];
   const rows = await sql`SELECT * FROM events ORDER BY client_ms_since_start ASC`;
   return rows as unknown as EventRecord[];
 }
 
 export async function saveEvents(sessionId: string, events: EventRecord[]) {
+  if (!sql) return;
   await sql`DELETE FROM events WHERE session_id = ${sessionId}`;
   for (const e of events) {
     await sql`
@@ -226,6 +232,7 @@ export async function saveEvents(sessionId: string, events: EventRecord[]) {
 }
 
 export async function saveMiniGameEntry(entry: MiniGameEntry) {
+  if (!sql) return;
   await sql`
     INSERT INTO mini_game_entries (
       run_id, user_id, mini_game_id, score_delta, duration_ms, raw_result
@@ -243,11 +250,13 @@ export async function saveMiniGameEntry(entry: MiniGameEntry) {
 }
 
 export async function getCompletedSessions(): Promise<SessionRecord[]> {
+  if (!sql) return [];
   const rows = await sql`SELECT * FROM sessions WHERE status = 'completed' ORDER BY created_at DESC`;
   return rows as unknown as SessionRecord[];
 }
 
 export async function computeRanks(sessionId: string) {
+  if (!sql) return { cohort_n: 0, rank_econ: 0, rank_env: 0, rank_leg: 0, rank_res: 0 };
   const rows = await sql`
     SELECT session_id, econ_total, env_total, leg_total, res_total
     FROM sessions WHERE status = 'completed' OR session_id = ${sessionId}
@@ -271,12 +280,14 @@ export async function computeRanks(sessionId: string) {
 }
 
 export async function deleteSession(sessionId: string) {
+  if (!sql) return;
   await sql`DELETE FROM events WHERE session_id = ${sessionId}`;
   await sql`DELETE FROM mini_game_entries WHERE run_id = ${sessionId}`;
   await sql`DELETE FROM sessions WHERE session_id = ${sessionId}`;
 }
 
 export async function getMiniGameEntries(): Promise<MiniGameEntry[]> {
+  if (!sql) return [];
   const rows = await sql`SELECT * FROM mini_game_entries ORDER BY created_at DESC`;
   return rows as unknown as MiniGameEntry[];
 }

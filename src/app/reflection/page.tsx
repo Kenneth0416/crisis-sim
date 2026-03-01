@@ -17,7 +17,7 @@ export default function ReflectionPage() {
   const qRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
-    if (!sessionId) { router.replace('/login'); return; }
+    if (!sessionId && process.env.NEXT_PUBLIC_DEMO_MODE !== 'true') { router.replace('/login'); return; }
     addEvent('page_enter', 'reflection', {});
   }, [sessionId, router, addEvent]);
 

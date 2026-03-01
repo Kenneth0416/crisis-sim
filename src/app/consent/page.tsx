@@ -12,7 +12,7 @@ export default function ConsentPage() {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (!sessionId) { router.replace('/login'); return; }
+    if (!sessionId && process.env.NEXT_PUBLIC_DEMO_MODE !== 'true') { router.replace('/login'); return; }
     addEvent('page_enter', 'consent', {});
   }, [sessionId, router, addEvent]);
 

@@ -29,7 +29,7 @@ export default function ComparisonPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!sessionId) { router.replace('/login'); return; }
+    if (!sessionId && process.env.NEXT_PUBLIC_DEMO_MODE !== 'true') { router.replace('/login'); return; }
     useGameStore.getState().addEvent('page_enter', 'board', {});
 
     const submitAndFetch = async () => {

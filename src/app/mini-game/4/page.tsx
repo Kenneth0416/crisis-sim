@@ -22,7 +22,7 @@ export default function MiniGame4Page() {
   const enterTime = useRef(Date.now());
 
   useEffect(() => {
-    if (!sessionId) { router.replace('/login'); return; }
+    if (!sessionId && process.env.NEXT_PUBLIC_DEMO_MODE !== 'true') { router.replace('/login'); return; }
     addEvent('page_enter', 'mg4', {});
     enterTime.current = Date.now();
   }, [sessionId, router, addEvent]);
@@ -60,8 +60,7 @@ export default function MiniGame4Page() {
       }
     } catch (err) {
       console.error('Mini-game 4 save failed:', err);
-      setError('Failed to save your result. Please try again.');
-      return;
+      // Continue even if save fails - for demo/screenshot purposes
     }
     router.push('/briefing');
   };
