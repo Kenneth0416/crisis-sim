@@ -25,6 +25,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(ranks);
   } catch (error) {
     console.error('Comparison error:', error);
-    return NextResponse.json({ error: 'Failed to compute ranks' }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({
+      error: 'Failed to compute ranks',
+      details: errorMessage,
+      stack: error instanceof Error ? error.stack : undefined
+    }, { status: 500 });
   }
 }
