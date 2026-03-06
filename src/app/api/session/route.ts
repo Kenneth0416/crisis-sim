@@ -9,6 +9,7 @@ export async function POST(request: NextRequest) {
       session_id: body.session_id,
       student_id: body.student_id,
       name: body.name,
+      email: body.email ?? '',
       start_time: body.start_time,
       end_time: body.end_time,
       total_duration_ms: body.total_duration_ms,

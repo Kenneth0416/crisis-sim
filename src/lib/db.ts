@@ -7,6 +7,7 @@ export interface SessionRecord {
   session_id: string;
   student_id: string;
   name: string;
+  email: string;
   start_time: string;
   end_time: string;
   total_duration_ms: number;
@@ -67,6 +68,7 @@ export async function initDb() {
       session_id TEXT PRIMARY KEY,
       student_id TEXT NOT NULL,
       name TEXT NOT NULL,
+      email TEXT DEFAULT '',
       start_time TIMESTAMPTZ,
       end_time TIMESTAMPTZ,
       total_duration_ms INTEGER DEFAULT 0,
@@ -137,6 +139,8 @@ export async function initDb() {
   await sql`ALTER TABLE sessions ADD COLUMN IF NOT EXISTS ref_q5_text TEXT DEFAULT ''`;
   await sql`ALTER TABLE sessions ADD COLUMN IF NOT EXISTS ref_q6 INTEGER DEFAULT 0`;
   await sql`ALTER TABLE sessions ADD COLUMN IF NOT EXISTS ref_q6_text TEXT DEFAULT ''`;
+  // Migration: add email column if it doesn't exist
+  await sql`ALTER TABLE sessions ADD COLUMN IF NOT EXISTS email TEXT DEFAULT ''`;
 }
 
 export async function getSessions(): Promise<SessionRecord[]> {
@@ -149,7 +153,7 @@ export async function saveSession(session: SessionRecord) {
   if (!sql) return;
   await sql`
     INSERT INTO sessions (
-      session_id, student_id, name, start_time, end_time,
+      session_id, student_id, name, email, start_time, end_time,
       total_duration_ms, status,
       mg1_result_json, mg2_result_json, mg3_result_json, mg4_result_json,
       s1_choice, s2_choice, s3_choice,
@@ -159,7 +163,7 @@ export async function saveSession(session: SessionRecord) {
       ref_q4, ref_q4_text, ref_q5, ref_q5_text, ref_q6, ref_q6_text, ref_open_text
     ) VALUES (
       ${session.session_id}, ${session.student_id}, ${session.name},
-      ${session.start_time}, ${session.end_time},
+      ${session.email}, ${session.start_time}, ${session.end_time},
       ${session.total_duration_ms}, ${session.status},
       ${session.mg1_result_json}, ${session.mg2_result_json},
       ${session.mg3_result_json}, ${session.mg4_result_json},
@@ -178,6 +182,7 @@ export async function saveSession(session: SessionRecord) {
     ON CONFLICT (session_id) DO UPDATE SET
       student_id = EXCLUDED.student_id,
       name = EXCLUDED.name,
+      email = EXCLUDED.email,
       start_time = EXCLUDED.start_time,
       end_time = EXCLUDED.end_time,
       total_duration_ms = EXCLUDED.total_duration_ms,

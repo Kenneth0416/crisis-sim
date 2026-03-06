@@ -43,7 +43,6 @@ export default function ConsentPage() {
               <ul className="list-disc pl-6 space-y-2">
                 <li>Your <strong>gameplay decisions</strong> and <strong>timing metrics</strong> will be recorded during this session.</li>
                 <li>All data is collected for <strong>academic research and teaching purposes only</strong>.</li>
-                <li>Data will be <strong>anonymized and aggregated</strong> for comparative analysis.</li>
                 <li>Your individual responses will not be shared publicly.</li>
               </ul>
             </div>

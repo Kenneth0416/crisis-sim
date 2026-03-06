@@ -43,6 +43,7 @@ export default function ComparisonPage() {
             session_id: snapshot.sessionId,
             student_id: snapshot.studentId,
             name: snapshot.studentName,
+            email: snapshot.studentEmail,
             start_time: new Date(snapshot.startTime).toISOString(),
             end_time: new Date().toISOString(),
             total_duration_ms: snapshot.getElapsedMs(),

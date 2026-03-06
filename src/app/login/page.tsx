@@ -9,16 +9,25 @@ export default function LoginPage() {
   const initSession = useGameStore((s) => s.initSession);
   const addEvent = useGameStore((s) => s.addEvent);
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = () => {
     if (!name.trim()) {
-      setError('Please enter your nickname.');
+      setError('Please enter your student name.');
       return;
     }
-    initSession(name.trim(), name.trim());
-    addEvent('login_submit', 'login', { name: name.trim() });
+    if (!email.trim()) {
+      setError('Please enter your NTU email address.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    initSession(name.trim(), name.trim(), email.trim());
+    addEvent('login_submit', 'login', { name: name.trim(), email: email.trim() });
     if (consent) {
       router.push('/consent');
     } else {
@@ -90,7 +99,7 @@ export default function LoginPage() {
             <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-6 sm:p-10">
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-slate-900 mb-2">Welcome</h2>
-                <p className="text-slate-500">Enter your nickname to begin the simulation.</p>
+                <p className="text-slate-500">Enter your details to begin the simulation.</p>
               </div>
 
               {error && (
@@ -100,18 +109,35 @@ export default function LoginPage() {
               <div className="space-y-6">
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1" htmlFor="nickname">Nickname</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1" htmlFor="name">1. Student Name (as shown on Matric card)</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <span className="material-symbols-outlined text-slate-400 text-[20px]">person</span>
                       </div>
                       <input
                         className="block w-full pl-10 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:border-[#137fec] focus:ring-[#137fec] focus:outline-none sm:text-sm py-3"
-                        id="nickname"
-                        placeholder="e.g. Alex"
+                        id="name"
+                        placeholder="e.g. Tan Kim Seng"
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1" htmlFor="email">2. Student's NTU email</label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-slate-400 text-[20px]">mail</span>
+                      </div>
+                      <input
+                        className="block w-full pl-10 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:border-[#137fec] focus:ring-[#137fec] focus:outline-none sm:text-sm py-3"
+                        id="email"
+                        placeholder="e.g. tan1234e@ntu.edu.sg"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                   </div>

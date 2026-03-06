@@ -4,6 +4,7 @@ import { getSessions, getEvents, getMiniGameEntries } from '@/lib/db';
 
 const SESSION_COLUMNS = [
   { key: 'name', header: 'Nickname' },
+  { key: 'email', header: 'Email' },
   { key: 'status', header: 'Status' },
   { key: 's1_choice', header: 'Scenario 1 Choice' },
   { key: 's2_choice', header: 'Scenario 2 Choice' },

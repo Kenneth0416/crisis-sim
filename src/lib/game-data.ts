@@ -283,10 +283,10 @@ export const SCENARIOS: Scenario[] = [
 
 // Reflection questions
 export const REFLECTION_QUESTIONS = [
-  { id: 1, question: 'On a scale of 1 to 9, how would you rate your overall experience with this intervention?', low: 'Very Poor', high: 'Excellent' },
-  { id: 2, question: 'How effective was this intervention in enhancing your ability to critically evaluate information or arguments?', low: 'Not Effective', high: 'Highly Effective' },
-  { id: 3, question: 'How effective was this intervention in developing your analytical skills (e.g., breaking down complex information or identifying key components)?', low: 'Not Effective', high: 'Highly Effective' },
-  { id: 4, question: 'How effective was this intervention in improving your ability to synthesise information from multiple sources?', low: 'Not Effective', high: 'Highly Effective' },
-  { id: 5, question: 'How effective was this intervention in helping you form clear and well-structured arguments?', low: 'Not Effective', high: 'Highly Effective' },
-  { id: 6, question: 'How effective was this intervention in improving your ability to develop arguments that are logical, coherent, and valid?', low: 'Not Effective', high: 'Highly Effective' },
+  { id: 1, question: 'On a scale of 1 to 9, how would you rate your overall experience with this game?', low: 'Very Poor', high: 'Excellent' },
+  { id: 2, question: 'How effective was this game in enhancing your ability to critically evaluate information or arguments?', low: 'Not Effective', high: 'Highly Effective' },
+  { id: 3, question: 'How effective was this game in developing your analytical skills (e.g., breaking down complex information or identifying key components)?', low: 'Not Effective', high: 'Highly Effective' },
+  { id: 4, question: 'How effective was this game in improving your ability to synthesise information from multiple sources?', low: 'Not Effective', high: 'Highly Effective' },
+  { id: 5, question: 'How effective was this game in helping you form clear and well-structured arguments?', low: 'Not Effective', high: 'Highly Effective' },
+  { id: 6, question: 'How effective was this game in improving your ability to develop arguments that are logical, coherent, and valid?', low: 'Not Effective', high: 'Highly Effective' },
 ];

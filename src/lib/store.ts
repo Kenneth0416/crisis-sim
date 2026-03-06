@@ -21,6 +21,7 @@ interface GameState {
   sessionId: string;
   studentId: string;
   studentName: string;
+  studentEmail: string;
   startTime: number;
   consentGiven: boolean;
 
@@ -39,7 +40,7 @@ interface GameState {
   events: GameEvent[];
 
   // Actions
-  initSession: (studentId: string, name: string) => void;
+  initSession: (studentId: string, name: string, email?: string) => void;
   setConsent: (consent: boolean) => void;
   setMg1Result: (result: GameState['mg1Result']) => void;
   setMg2Result: (result: GameState['mg2Result']) => void;
@@ -73,6 +74,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   sessionId: '',
   studentId: '',
   studentName: '',
+  studentEmail: '',
   startTime: 0,
   consentGiven: false,
   mg1Result: null,
@@ -84,10 +86,11 @@ export const useGameStore = create<GameState>((set, get) => ({
   scores: { ...initialScores },
   events: [],
 
-  initSession: (studentId, name) => set({
+  initSession: (studentId, name, email = '') => set({
     sessionId: uuidv4(),
     studentId,
     studentName: name,
+    studentEmail: email,
     startTime: Date.now(),
     consentGiven: false,
     mg1Result: null,
@@ -133,6 +136,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     sessionId: '',
     studentId: '',
     studentName: '',
+    studentEmail: '',
     startTime: 0,
     consentGiven: false,
     mg1Result: null,

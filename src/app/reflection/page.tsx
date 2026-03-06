@@ -117,7 +117,7 @@ export default function ReflectionPage() {
               })}
               <div className="h-px bg-slate-100 w-full" />
               <div className="space-y-4" ref={(el) => { qRefs.current['open-text'] = el; }}>
-                <label className="block text-lg font-semibold text-slate-900">7. What suggestions do you have for improving this intervention? <span className="text-red-500">*</span></label>
+                <label className="block text-lg font-semibold text-slate-900">7. What suggestions do you have for improving this game? <span className="text-red-500">*</span></label>
                 <textarea className={`w-full rounded-lg border bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:border-[#137fec] focus:ring-[#137fec] sm:text-sm p-3 transition-colors ${errorFields.has('open-text') ? 'border-red-300 ring-2 ring-red-300' : 'border-slate-200'}`}
                   placeholder="Share your suggestions here..." rows={4} value={openText}
                   onChange={(e) => { setOpenText(e.target.value); clearField('open-text'); }} />
