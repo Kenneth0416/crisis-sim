@@ -93,10 +93,9 @@ export default function MiniGame2Page() {
             return (
               <div key={stmt.id} className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                 <div className="p-6 border-b border-slate-100">
-                  <div className="flex items-center gap-2 text-slate-500 text-sm font-medium mb-2">
-                    <span className="material-symbols-outlined text-lg">format_quote</span>
-                    Statement {stmt.id}: {stmt.title}
-                  </div>
+                <div className="flex items-center gap-2 text-slate-500 text-sm font-medium mb-2">
+                  {stmt.title}
+                </div>
                   <p className="text-lg font-medium text-slate-800 leading-relaxed">{stmt.statement}</p>
                   <div className="mt-3 flex items-start gap-2 text-sm text-blue-700 bg-blue-50 p-3 rounded-lg">
                     <span className="material-symbols-outlined text-sm mt-0.5">lightbulb</span>
